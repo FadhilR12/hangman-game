@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./output.css" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <title>Frontend Mentor | Hangman game</title>
 </head>
 
-<body
+<body x-data="app()"
   class="font-mouse-memoirs min-w-90 bg-[url(./assets/images/background-mobile.svg)] md:bg-[url(./assets/images/background-tablet.svg)] lg:bg-[url(./assets/images/background-desktop.svg)] bg-no-repeat bg-cover items-center flex flex-col font-outfit">
 
   <!-- Start screen start -->
-   <section class="hidden flex flex-col items-center min-h-screen justify-center">
+  <section class="hidden flex flex-col items-center min-h-screen justify-center">
 
     <!-- border -->
     <div
@@ -42,8 +42,8 @@
   <!-- Start screen end -->
 
   <!-- How to play screen start -->
-<section
-    class="flex flex-col items-center min-h-screen pt-[31px] gap-[80px] md:items-start md:pt-[61px] lg:pt-[80px]">
+  <section
+    class="hidden flex flex-col items-center min-h-screen pt-[31px] gap-[80px] md:items-start md:pt-[61px] lg:pt-[80px]">
 
     <!-- header -->
     <div class="flex flex-row items-center gap-[86px] md:gap-[107px] lg:gap-[290px]">
@@ -82,7 +82,8 @@
     </div>
 
     <!-- content -->
-    <div class="flex flex-col items-center gap-[24px] lg:gap-[32px] w-[324px] md:w-[680px] md:gap-[32px] lg:flex-row lg:w-fit">
+    <div
+      class="flex flex-col items-center gap-[24px] lg:gap-[32px] w-[324px] md:w-[680px] md:gap-[32px] lg:flex-row lg:w-fit">
       <!-- 1 -->
       <div
         class="flex flex-col p-[32px] bg-white gap-[16px] rounded-[20px] h-fit md:flex-row md:items-center md:gap-[40px] lg:flex-col lg:h-[550px] lg:justify-center">
@@ -111,7 +112,7 @@
       </div>
 
       <!-- 2 -->
-       <div
+      <div
         class="flex flex-col p-[32px] bg-white gap-[16px] rounded-[20px] h-fit md:flex-row md:items-center md:gap-[40px] lg:flex-col lg:h-[550px] lg:justify-center">
         <!-- mobile -->
         <div class="flex md:hidden flex-row gap-[16px] items-center text-[24px] leading-[1.2] tracking-[0.75px]">
@@ -119,7 +120,8 @@
           <p class="text-indigo-600">GUESS LETTERS</p>
         </div>
         <p class="text-[16px] md:hidden leading-[1.2] text-indigo-400 tracking-[0.75px]">
-          Take turns guessing letters. The computer fills in the relevant blank spaces if your guess is correct. If it’s wrong, you lose some health, which empties after eight incorrect guesses.
+          Take turns guessing letters. The computer fills in the relevant blank spaces if your guess is correct. If it’s
+          wrong, you lose some health, which empties after eight incorrect guesses.
         </p>
 
         <!-- tablet/desktop -->
@@ -129,12 +131,13 @@
             GUESS LETTERS</p>
           <p
             class="text-[20px] lg:w-[288px] leading-[1.2] tracking-[0.75px] lg:text-[26px] lg:text-center text-indigo-400">
-            Take turns guessing letters. The computer fills in the relevant blank spaces if your guess is correct. If it’s wrong, you lose some health, which empties after eight incorrect guesses.</p>
+            Take turns guessing letters. The computer fills in the relevant blank spaces if your guess is correct. If
+            it’s wrong, you lose some health, which empties after eight incorrect guesses.</p>
         </div>
       </div>
 
       <!-- 3 -->
-       <div
+      <div
         class="flex flex-col p-[32px] bg-white gap-[16px] rounded-[20px] h-fit md:flex-row md:items-center md:gap-[40px] lg:flex-col lg:h-[550px] lg:justify-center">
         <!-- mobile -->
         <div class="flex md:hidden flex-row gap-[16px] items-center text-[24px] leading-[1.2] tracking-[0.75px]">
@@ -142,7 +145,8 @@
           <p class="text-indigo-600">WIN OR LOSE</p>
         </div>
         <p class="text-[16px] md:hidden leading-[1.2] text-indigo-400 tracking-[0.75px]">
-          You win by guessing all the letters in the word before your health runs out. If the health bar empties before you guess the word, you lose.
+          You win by guessing all the letters in the word before your health runs out. If the health bar empties before
+          you guess the word, you lose.
         </p>
 
         <!-- tablet/desktop -->
@@ -152,10 +156,11 @@
             WIN OR LOSE</p>
           <p
             class="text-[20px] lg:w-[288px] leading-[1.2] tracking-[0.75px] lg:text-[26px] lg:text-center text-indigo-400">
-            You win by guessing all the letters in the word before your health runs out. If the health bar empties before you guess the word, you lose.</p>
+            You win by guessing all the letters in the word before your health runs out. If the health bar empties
+            before you guess the word, you lose.</p>
         </div>
       </div>
-      
+
     </div>
 
 
@@ -164,12 +169,85 @@
   <!-- How to play screen end -->
 
   <!-- Pick a category start -->
+  <section
+    class="flex flex-col items-center min-h-screen pt-[31px] md:pt-[61px] lg:pt-[80px] min-w-[324px] md:min-w-[680px] lg:w-screen lg:px-[114px] gap-[100px]">
+    <!-- header -->
+    <div class="md:items-start flex w-full">
+      <div class="flex flex-row items-center mx-0 gap-[29px] md:gap-[54px] lg:gap-[219.5px]">
 
+        <!-- return button -->
+        <div
+          class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] lg:w-[94px] lg:h-[94px] items-center flex justify-center bg-gradient-3 rounded-full border shadow-[inset_0_-5px_0_-1px_rgb(157_45_245/25%)]">
+          <img class="w-[17.45px] md:w-[28px] md:h-[26px] lg:w-[41px] lg:h-[38px] h-[17.45px]"
+            src="./assets/images/icon-back.svg" alt="">
+        </div>
+
+        <!-- PICK A CATEGORY -->
+        <div
+          class="relative inline-block text-[48px] tracking-[2.5px] md:text-[104px] leading-[1.2] md:tracking-[-1px] lg:text-[136px]">
+          <!-- Outline -->
+          <p class="md:hidden absolute inset-0 text-slate-600 [-webkit-text-stroke:8px_#243041]">
+            PICK A CATEGORY
+          </p>
+
+          <!-- Gradient -->
+          <p class="md:hidden relative bg-gradient-2 bg-clip-text text-transparent">
+            PICK A CATEGORY
+          </p>
+
+          <!-- TAB/DESKTOP -->
+          <!-- Outline -->
+          <p class="absolute hidden md:flex inset-0 text-slate-600 [-webkit-text-stroke:16px_#243041]">
+            Pick a Category
+          </p>
+
+          <!-- Gradient -->
+          <p class=" relative hidden md:flex bg-gradient-2 bg-clip-text text-transparent">
+            Pick a Category
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- category -->
+    <div
+      class="grid grid-cols-1 gap-[16px] items-center text-white text-[24px] leading-[1.2] tracking-[0.75px] md:grid-cols-2 md:text-[48px] md:leading-[1.2] md:tracking-[2.5px] md:gap-[32px] xl:grid-cols-3">
+
+      <!-- box -->
+      <template x-for="(items, categoryName) in categories" :key="categoryName">
+        <div
+          class="w-[324px] xl:w-[384px] h-fit bg-blue-600 px-[64px] py-[24px] rounded-[20px] flex flex-col items-center justify-center md:h-[182.67px] md:rounded-[40px] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]">
+          <p x-text="categoryName" class="whitespace-nowrap">MOVIES</p>
+        </div>
+      </template>
+
+
+
+
+    </div>
+  </section>
   <!-- Pick a category end -->
 
   <!-- Game screen start -->
 
   <!-- Game screen end -->
+
+
+  <script>
+    function app() {
+      return {
+        categories: {},
+
+
+
+        async init() {
+          const data = await (await fetch('data.json')).json();
+          this.categories = data.categories;
+        }
+      }
+    }
+  </script>
 
 </body>
 
