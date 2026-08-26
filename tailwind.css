@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Mouse Memoirs";
+  src: url("./assets/fonts/MouseMemoirs-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@theme {
+  /* Neutral */
+  --color-neutral-950: #000000;
+  --color-neutral-0: #ffffff;
+
+  /* Slate */
+  --color-slate-950: #0b1524;
+  --color-slate-600: #243041;
+
+  /* Blue */
+  --color-blue-600: #2463ff;
+  --color-blue-500: #5b8aff;
+
+  /* Indigo */
+  --color-indigo-600: #262076;
+  --color-indigo-400: #887dc0;
+
+  /* Gradients */
+  --background-image-gradient-1: linear-gradient(
+    180deg,
+    #344aba 0%,
+    rgba(0, 20, 121, 0.8) 100%
+  );
+
+  --background-image-gradient-2: linear-gradient(
+    180deg,
+    #67b6ff -7%,
+    #ffffff 108%
+  );
+
+  --background-image-gradient-3: linear-gradient(
+    180deg,
+    #fe71fe 16%,
+    #7199ff 100%
+  );
+
+  --background-image-gradient-4: linear-gradient(
+    180deg,
+    #ff95ff 0%,
+    #a3aeff 100%
+  );
+
+  --background-image-gradient-5: linear-gradient(
+    180deg,
+    #1a043a 0%,
+    #512778 70%,
+    #2b1677 100%
+  );
+
+  --font-mouse-memoirs: "Mouse Memoirs", sans-serif;
+}

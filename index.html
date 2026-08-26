@@ -1,73 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <link href="./output.css" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+
   <title>Frontend Mentor | Hangman game</title>
 </head>
-<body>
- 
+
+<body
+  class="font-mouse-memoirs min-w-90 bg-[url(./assets/images/background-mobile.svg)] md:bg-[url(./assets/images/background-tablet.svg)] lg:bg-[url(./assets/images/background-desktop.svg)] bg-no-repeat bg-cover items-center flex flex-col font-outfit">
+
   <!-- Start screen start -->
+   <section class="hidden flex flex-col items-center min-h-screen justify-center">
 
-  How to play
+    <!-- border -->
+    <div
+      class="min-w-81 mt-10 h-120.25 md:w-[592px] md:h-[500px] flex flex-col items-center relative justify-center bg-gradient-1 gap-14.25 rounded-[48px] shadow-[inset_0_-8px_0_4px_#140E66,inset_0_6px_0_8px_#2463FF]">
 
+      <!-- title -->
+      <div class="absolute -top-12 md:-top-29">
+        <img class="w-65.75 md:w-[373.7px] h-32.5 md:h-[185px]" src="./assets/images/logo.svg" alt="">
+      </div>
+
+      <!-- play icon -->
+      <div
+        class="w-40 mt-15 mb-5 h-40 md:w-[200px] md:h-[200px] rounded-[999px] bg-gradient-3 shadow-[inset_0_-4px_0_5px_#243041,inset_0_-12px_0_11px_#9D2DF5] border items-center justify-center flex">
+        <img src="./assets/images/icon-play.svg" alt="">
+      </div>
+
+      <!-- how to play -->
+      <div
+        class="bg-blue-600 px-16 py-3 flex flex-col gap-2 rounded-[40px] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]">
+        <p class="text-[32px] leading-[1.2] tracking-[1.75px] text-white">HOW TO PLAY</p>
+      </div>
+
+    </div>
+  </section>
   <!-- Start screen end -->
 
   <!-- How to play screen start -->
+<section
+    class="flex flex-col items-center min-h-screen pt-[31px] gap-[80px] md:items-start md:pt-[61px] lg:pt-[80px]">
 
-  How to Play
+    <!-- header -->
+    <div class="flex flex-row items-center gap-[86px] md:gap-[107px] lg:gap-[290px]">
 
-  01
-  Choose a category
-  First, choose a word category, like animals or movies. 
-  The computer then randomly selects a secret word from that 
-  topic and shows you blanks for each letter of the word.
+      <!-- return button -->
+      <div
+        class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] lg:w-[94px] lg:h-[94px] items-center flex justify-center bg-gradient-3 rounded-full border shadow-[inset_0_-5px_0_-1px_rgb(157_45_245/25%)]">
+        <img class="w-[17.45px] md:w-[28px] md:h-[26px] lg:w-[41px] lg:h-[38px] h-[17.45px]"
+          src="./assets/images/icon-back.svg" alt="">
+      </div>
 
-  02
-  Guess letters
-  Take turns guessing letters. The computer fills in the 
-  relevant blank spaces if your guess is correct. If it's 
-  wrong, you lose some health, which empties after eight 
-  incorrect guesses.
+      <!-- how to play -->
+      <div
+        class="relative inline-block text-[48px] tracking-[2.5px] md:text-[104px] leading-[1.2] md:tracking-[-1px] lg:text-[136px]">
+        <!-- Outline -->
+        <p class="md:hidden absolute inset-0 text-slate-600 [-webkit-text-stroke:8px_#243041]">
+          HOW TO PLAY
+        </p>
 
-  03
-  Win or lose
-  You win by guessing all the letters in the word before your 
-  health runs out. If the health bar empties before you guess 
-  the word, you lose.
+        <!-- Gradient -->
+        <p class="md:hidden relative bg-gradient-2 bg-clip-text text-transparent">
+          HOW TO PLAY
+        </p>
 
+        <!-- TAB/DESKTOP -->
+        <!-- Outline -->
+        <p class="absolute hidden md:flex inset-0 text-slate-600 [-webkit-text-stroke:16px_#243041]">
+          How to Play
+        </p>
+
+        <!-- Gradient -->
+        <p class=" relative hidden md:flex bg-gradient-2 bg-clip-text text-transparent">
+          How to Play
+        </p>
+      </div>
+    </div>
+
+    <!-- content -->
+    <div class="flex flex-col items-center gap-[24px] lg:gap-[32px] w-[324px] md:w-[680px] md:gap-[32px] lg:flex-row lg:w-fit">
+      <!-- 1 -->
+      <div
+        class="flex flex-col p-[32px] bg-white gap-[16px] rounded-[20px] h-fit md:flex-row md:items-center md:gap-[40px] lg:flex-col lg:h-[550px] lg:justify-center">
+        <!-- mobile -->
+        <div class="flex md:hidden flex-row gap-[16px] items-center text-[24px] leading-[1.2] tracking-[0.75px]">
+          <p class="text-blue-600">01</p>
+          <p class="text-indigo-600">CHOOSE A CATEGORY</p>
+        </div>
+        <p class="text-[16px] md:hidden leading-[1.2] text-indigo-400 tracking-[0.75px]">
+          First, choose a word category, like animals or movies. The computer then randomly selects a secret word from
+          that topic and shows you blanks for each letter of the word.
+        </p>
+
+        <!-- tablet/desktop -->
+        <p class="text-[88px] md:flex hidden leading-[1.2] text-blue-600">01</p>
+        <div class="flex-col md:flex items-start lg:items-center hidden gap-[16px] lg:gap-[24px]">
+          <p class="text-[40px] lg:text-[48px] leading-[1.2] lg:tracking-[2.5px] tracking-[1.75px] text-indigo-600">
+            CHOOSE A CATEGORY</p>
+          <p
+            class="text-[20px] lg:w-[288px] leading-[1.2] tracking-[0.75px] lg:text-[26px] lg:text-center text-indigo-400">
+            First, choose a word category, like
+            animals or movies. The computer then randomly selects a secret word
+            from
+            that topic and shows you blanks for each letter of the word.</p>
+        </div>
+      </div>
+
+      <!-- 2 -->
+       <div
+        class="flex flex-col p-[32px] bg-white gap-[16px] rounded-[20px] h-fit md:flex-row md:items-center md:gap-[40px] lg:flex-col lg:h-[550px] lg:justify-center">
+        <!-- mobile -->
+        <div class="flex md:hidden flex-row gap-[16px] items-center text-[24px] leading-[1.2] tracking-[0.75px]">
+          <p class="text-blue-600">02</p>
+          <p class="text-indigo-600">GUESS LETTERS</p>
+        </div>
+        <p class="text-[16px] md:hidden leading-[1.2] text-indigo-400 tracking-[0.75px]">
+          Take turns guessing letters. The computer fills in the relevant blank spaces if your guess is correct. If it’s wrong, you lose some health, which empties after eight incorrect guesses.
+        </p>
+
+        <!-- tablet/desktop -->
+        <p class="text-[88px] md:flex hidden leading-[1.2] text-blue-600">02</p>
+        <div class="flex-col md:flex items-start lg:items-center hidden gap-[16px] lg:gap-[24px]">
+          <p class="text-[40px] lg:text-[48px] leading-[1.2] lg:tracking-[2.5px] tracking-[1.75px] text-indigo-600">
+            GUESS LETTERS</p>
+          <p
+            class="text-[20px] lg:w-[288px] leading-[1.2] tracking-[0.75px] lg:text-[26px] lg:text-center text-indigo-400">
+            Take turns guessing letters. The computer fills in the relevant blank spaces if your guess is correct. If it’s wrong, you lose some health, which empties after eight incorrect guesses.</p>
+        </div>
+      </div>
+
+      <!-- 3 -->
+       <div
+        class="flex flex-col p-[32px] bg-white gap-[16px] rounded-[20px] h-fit md:flex-row md:items-center md:gap-[40px] lg:flex-col lg:h-[550px] lg:justify-center">
+        <!-- mobile -->
+        <div class="flex md:hidden flex-row gap-[16px] items-center text-[24px] leading-[1.2] tracking-[0.75px]">
+          <p class="text-blue-600">03</p>
+          <p class="text-indigo-600">WIN OR LOSE</p>
+        </div>
+        <p class="text-[16px] md:hidden leading-[1.2] text-indigo-400 tracking-[0.75px]">
+          You win by guessing all the letters in the word before your health runs out. If the health bar empties before you guess the word, you lose.
+        </p>
+
+        <!-- tablet/desktop -->
+        <p class="text-[88px] md:flex hidden leading-[1.2] text-blue-600 lg:-mt-8">03</p>
+        <div class="flex-col md:flex items-start lg:items-center hidden gap-[16px] lg:gap-[24px]">
+          <p class="text-[40px] lg:text-[48px] leading-[1.2] lg:tracking-[2.5px] tracking-[1.75px] text-indigo-600">
+            WIN OR LOSE</p>
+          <p
+            class="text-[20px] lg:w-[288px] leading-[1.2] tracking-[0.75px] lg:text-[26px] lg:text-center text-indigo-400">
+            You win by guessing all the letters in the word before your health runs out. If the health bar empties before you guess the word, you lose.</p>
+        </div>
+      </div>
+      
+    </div>
+
+
+
+  </section>
   <!-- How to play screen end -->
 
   <!-- Pick a category start -->
-
-  Pick a Category
-
-  Movies
-  TV Shows
-  Countries
-  Capital Cities
-  Animals
-  Sports
 
   <!-- Pick a category end -->
 
   <!-- Game screen start -->
 
-  Movies/TV Shows/Countries/Capital Cities/Animals/Sports
-
-  a b c d e f g h i j k l m n o p q r s t u v w x y z
-
-  Paused/You Win/You Lose
-
-  Continue
-  Play again!
-  New category
-  Quit game
-
   <!-- Game screen end -->
 
 </body>
+
 </html>
