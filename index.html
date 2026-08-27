@@ -11,10 +11,10 @@
 </head>
 
 <body x-data="app()"
-  class="font-mouse-memoirs min-w-90 bg-[url(./assets/images/background-mobile.svg)] md:bg-[url(./assets/images/background-tablet.svg)] lg:bg-[url(./assets/images/background-desktop.svg)] bg-no-repeat bg-cover items-center flex flex-col font-outfit">
+  class="font-mouse-memoirs min-w-90 bg-[url(./assets/images/background-mobile.svg)] md:bg-[url(./assets/images/background-tablet.svg)] lg:bg-[url(./assets/images/background-desktop.svg)] bg-no-repeat bg-cover items-center flex flex-col font-outfit ">
 
   <!-- Start screen start -->
-  <section class=" flex flex-col items-center min-h-screen justify-center">
+  <section x-show="isMain" class="flex flex-col items-center min-h-screen justify-center">
 
     <!-- border -->
     <div
@@ -26,13 +26,13 @@
       </div>
 
       <!-- play icon -->
-      <div
+      <div @click="toggleMenu()"
         class="w-40 mt-15 mb-5 h-40 md:w-[200px] md:h-[200px] rounded-[999px] bg-gradient-3 shadow-[inset_0_-4px_0_5px_#243041,inset_0_-12px_0_11px_#9D2DF5] border items-center justify-center flex">
         <img src="./assets/images/icon-play.svg" alt="">
       </div>
 
       <!-- how to play -->
-      <div
+      <div @click="toggleHowToPlay()"
         class="bg-blue-600 px-16 py-3 flex flex-col gap-2 rounded-[40px] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]">
         <p class="text-[32px] leading-[1.2] tracking-[1.75px] text-white">HOW TO PLAY</p>
       </div>
@@ -42,13 +42,13 @@
   <!-- Start screen end -->
 
   <!-- How to play screen start -->
-  <section class=" flex flex-col items-center min-h-screen pt-[31px] gap-[80px] md:items-start md:pt-[xl-[80px]">
+  <section x-show="isHTP" class="flex flex-col items-center min-h-screen pt-[31px] gap-[80px] md:items-start">
 
     <!-- header -->
     <div class="flex flex-row items-center gap-[86px] md:gap-[107px] xl:gap-[290px]">
 
       <!-- return button -->
-      <div
+      <div @click="toggleHowToPlay()"
         class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] xl:w-[94px] xl:h-[94px] items-center flex justify-center bg-gradient-3 rounded-full border shadow-[inset_0_-5px_0_-1px_rgb(157_45_245/25%)]">
         <img class="w-[17.45px] md:w-[28px] md:h-[26px] xl:w-[41px] xl:h-[38px] h-[17.45px]"
           src="./assets/images/icon-back.svg" alt="">
@@ -168,14 +168,14 @@
   <!-- How to play screen end -->
 
   <!-- Pick a category start -->
-  <section
-    class="flex flex-col items-center min-h-screen pt-[31px] md:pt-[61px] lg:pt-[80px] min-w-[324px] md:min-w-[680px] lg:w-screen lg:px-[114px] gap-[100px]">
+  <section x-show="isCat"
+    class="flex relative flex-col items-center min-h-screen pt-[31px] md:pt-[61px] lg:pt-[80px] min-w-[324px] md:min-w-[680px] lg:w-screen lg:px-[114px] gap-[100px]">
     <!-- header -->
     <div class="md:items-start flex w-full">
       <div class="flex flex-row items-center mx-0 gap-[29px] md:gap-[54px] lg:gap-[219.5px]">
 
         <!-- return button -->
-        <div
+        <div @click="toggleMenu()"
           class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] lg:w-[94px] lg:h-[94px] items-center flex justify-center bg-gradient-3 rounded-full border shadow-[inset_0_-5px_0_-1px_rgb(157_45_245/25%)]">
           <img class="w-[17.45px] md:w-[28px] md:h-[26px] lg:w-[41px] lg:h-[38px] h-[17.45px]"
             src="./assets/images/icon-back.svg" alt="">
@@ -215,20 +215,117 @@
 
       <!-- box -->
       <template x-for="(items, categoryName) in categories" :key="categoryName">
-        <div
+        <div @click="selectedCategory = categoryName, startPlay()"
           class="w-[324px] xl:w-[384px] h-fit bg-blue-600 px-[64px] py-[24px] rounded-[20px] flex flex-col items-center justify-center md:h-[182.67px] md:rounded-[40px] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]">
           <p x-text="categoryName" class="whitespace-nowrap">MOVIES</p>
         </div>
       </template>
-
-
-
-
     </div>
   </section>
   <!-- Pick a category end -->
 
   <!-- Game screen start -->
+  <section x-show="inGame"
+    class=" flex flex-col relative items-center min-h-screen w-[324px] pt-[31px] md:w-[680px] xl:w-[1216.33px]">
+    <!-- header -->
+    <div class="flex justify-between items-center mb-[78px] md:mb-[111px] xl:mb-[88px] w-full">
+      <div class="flex flex-row items-center gap-[16px] md:gap-[32px] xl:md:gap-[56px]">
+        <!-- menu -->
+        <div @click="isPaused = !isPaused"
+          class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] xl:w-[94px] xl:h-[94px] items-center flex justify-center bg-gradient-3 rounded-full border shadow-[inset_0_-5px_0_-1px_rgb(157_45_245/25%)]">
+          <img class="w-[17.45px] md:w-[28px] md:h-[26px] xl:w-[41px] xl:h-[38px] h-[17.45px]"
+            src="./assets/images/icon-menu.svg" alt="">
+        </div>
+
+        <!-- category -->
+        <div
+          class="text-[40px] leading-[1.2] tracking-[1.75px] text-white md:text-[48px] md:tracking-[2.5px] lg:text-[88px] lg:leading-[1.2] lg:tracking-normal">
+          <p x-text="selectedCategory">MOVIES</p>
+        </div>
+      </div>
+
+      <div class="flex flex-row items-center gap-[16px]">
+        <!-- lives -->
+        <div class="w-[57px] md:w-[160px] xl:w-fit h-fit p-[4px] bg-white rounded-full flex flex-row">
+          <!-- <div class="w-[21px] md:w-[65px] xl:w-[119px] md:h-[13px] h-[8px] rounded-full bg-indigo-600"></div> -->
+          <div class="w-full h-[8px] xl:w-[119px] md:h-[13px] rounded-full bg-indigo-600"></div>
+        </div>
+
+        <!-- live logo -->
+        <div class="w-[26px] h-[24px] md:w-[53.3px] md:h-[49px]">
+          <img src="./assets/images/icon-heart.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <!-- word -->
+    <div
+      class="flex flex-wrap w-full items-center justify-center mx-auto mb-[118px] md:mb-[134px] xl:mb-[120px] gap-y-3 gap-x-4 px-2 py-4 md:p-6">
+      <template x-for="(w, wIdx) in currentWord.split(' ')" :key="wIdx">
+        <div class="flex justify-center items-center mx-auto gap-1 sm:gap-1.5 md:gap-2"
+          :class="w.length > 8 ? 'flex-wrap max-w-[300px] sm:max-w-none' : 'flex-nowrap'">
+
+          <template x-for="(letter, lIdx) in w.split('')" :key="lIdx">
+            <div
+              class="w-[40px] h-[66px]  md:w-[86px] md:h-[112px] bg-[#2463FF] rounded-[12px] grid place-items-center text-white font-bold text-base sm:text-2xl md:text-4xl shadow-[inset_0_-2px_0_3_#140E66] md:shadow-[inset_0_-4px_0_0_#140E66]">
+              <span x-text="guessedLetters.includes(letter) ? letter : ''"></span>
+            </div>
+          </template>
+        </div>
+      </template>
+
+    </div>
+
+
+    <!-- keyboard -->
+    <div class="grid grid-cols-9 gap-[8px] md:gap-[16px] xl:gap-[24px] mb-[78px] w-full">
+      <template x-for="letter in alphabet" :key="letter">
+        <button @click="guess(letter)" :disabled="guessedLetters.includes(letter)" :class="guessedLetters.includes(letter) 
+                        ? 'bg-blue-950/50 text-blue-800/40 cursor-not-allowed shadow-none' 
+                        : 'bg-white text-blue-950 hover:bg-blue-200 active:translate-y-1 active:shadow-none'"
+          class="h-[56px] md:h-[84px] w-full md:w-[64px] rounded-[8px] md:rounded-[24px] text-[24px] leading-[1.2] tracking-[0.75px] md:text-[48px] md:tracking-[2.5px] flex items-center justify-center transition-all uppercase xl:w-[109px] xl:w-[84px]"
+          x-text="letter">
+        </button>
+      </template>
+    </div>
+
+
+    <!-- MENU -->
+    <div x-show="isPaused"
+      class="bg-gradient-to-b from-indigo-600/50 from-20% to-blue-600/50 to-80%  w-screen h-screen items-center justify-center flex flex-col absolute -top-0">
+      <div
+        class="relative min-w-81 mt-10 h-[445px] w-[324px] md:w-[592px] md:h-[500px] flex flex-col items-center justify-center bg-gradient-1 gap-14.25 rounded-[48px] shadow-[inset_0_-8px_0_4px_#140E66,inset_0_6px_0_8px_#2463FF]">
+
+        <!-- title -->
+        <div class="absolute -top-12 md:-top-29">
+          <img x-show="!isWin && !isLose" class="w-[183px] md:w-[373.7px] h-[113px] md:h-[185px]" src="./assets/images/icon-pause.svg" alt="">
+          <img x-show="isWin" src="./assets/images/icon-win.svg" alt="">
+          <img x-show="isLose" src="./assets/images/icon-lose.svg" alt="">
+        </div>
+
+        <div class="flex flex-col items-center gap-[32px]">
+          <!-- continue -->
+          <div @click="isPaused = !isPaused"
+            class="bg-blue-600 px-16 py-3 flex flex-col gap-2 rounded-[40px] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]">
+            <p class="text-[32px] leading-[1.2] tracking-[1.75px] text-white">CONTINUE</p>
+          </div>
+
+          <!-- new category -->
+          <div
+            class="bg-blue-600 px-16 py-3 flex flex-col gap-2 rounded-[40px] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]">
+            <p class="text-[32px] leading-[1.2] tracking-[1.75px] text-white">NEW CATEGORY</p>
+          </div>
+
+          <!-- quit game -->
+          <div @click="quitGame()"
+            class="bg-gradient-3 px-16 py-3 flex flex-col gap-2 rounded-[40px] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#C642FB]">
+            <p class="text-[32px] leading-[1.2] tracking-[1.75px] text-white">QUIT GAME</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
 
   <!-- Game screen end -->
 
@@ -237,12 +334,80 @@
     function app() {
       return {
         categories: {},
-
-
+        selectedCategory: 'Movies',
+        isMain: true,
+        isHTP: false,
+        isCat: false,
+        inGame: false,
+        isPaused: false,
+        isWin: false,
+        isLose: false,
+        currentWord: '',
+        guessedLetters: [],
+        alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+        lives: 8,
+        maxLives: 8,
 
         async init() {
-          const data = await (await fetch('data.json')).json();
-          this.categories = data.categories;
+          const data = await (await fetch('data.json')).json()
+          this.categories = data.categories
+          this.startNewGame(this.selectedCategory)
+        },
+
+        toggleMenu() {
+          this.isMain = !this.isMain
+          this.isCat = !this.isCat
+        },
+
+        quitGame(){
+          this.isMain = !this.isMain
+          this.inGame = !this.inGame
+          this.isPaused = !this.isPaused
+        },
+        // inGame = !inGame, isMain = !isMain, isPaused = !isPaused
+        toggleHowToPlay() {
+          this.isMain = !this.isMain
+          this.isHTP = !this.isHTP
+        },
+
+        startPlay(){
+          this.isCat = !this.isCat
+          this.inGame = !this.inGame
+          this.startNewGame(this.selectedCategory)
+        },
+
+        startNewGame(categoryName) {
+          this.selectedCategory = categoryName
+          const itemList = this.categories[categoryName]
+
+          if (itemList && itemList.length > 0) {
+            const randomItem = itemList[Math.floor(Math.random() * itemList.length)]
+            this.currentWord = randomItem.name.toUpperCase()
+          }
+
+          this.guessedLetters = []
+          this.lives = this.maxLives
+          this.isWin = false
+          this.isLose = false
+          this.revealHints(3)
+        },
+
+        revealHints(count){
+          if (!this.currentWord) return
+          let uniqueLetters = [...new Set(this.currentWord.replace(/ /g, '').split(''))]
+          let shuffled = uniqueLetters.sort(() => 0.5 - Math.random())
+          let hints = shuffled.slice(0, count)
+          this.guessedLetters.push(...hints)
+        },
+
+        guess(letter) {
+          if (this.guessedLetters.includes(letter)) return
+
+          this.guessedLetters.push(letter)
+
+          if (!this.currentWord.includes(letter)) {
+            this.lives = Math.max(0, this.lives - 1)
+          }
         }
       }
     }
