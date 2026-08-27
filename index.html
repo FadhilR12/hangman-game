@@ -248,7 +248,7 @@
         <!-- lives -->
         <div class="w-[57px] md:w-[160px] xl:w-fit h-fit p-[4px] bg-white rounded-full flex flex-row">
           <!-- <div class="w-[21px] md:w-[65px] xl:w-[119px] md:h-[13px] h-[8px] rounded-full bg-indigo-600"></div> -->
-          <div class="w-full h-[8px] xl:w-[119px] md:h-[13px] rounded-full bg-indigo-600"></div>
+          <div class="w-full h-[8px] xl:w-[119px] md:h-[13px] rounded-full bg-indigo-600 transition-all duration-300" :style="`width: ${(lives / maxLives) * 100}%`"></div>
         </div>
 
         <!-- live logo -->
@@ -291,27 +291,34 @@
 
 
     <!-- MENU -->
-    <div x-show="isPaused"
+    <div x-show="isPaused || isWin || isLose"
       class="bg-gradient-to-b from-indigo-600/50 from-20% to-blue-600/50 to-80%  w-screen h-screen items-center justify-center flex flex-col absolute -top-0">
       <div
         class="relative min-w-81 mt-10 h-[445px] w-[324px] md:w-[592px] md:h-[500px] flex flex-col items-center justify-center bg-gradient-1 gap-14.25 rounded-[48px] shadow-[inset_0_-8px_0_4px_#140E66,inset_0_6px_0_8px_#2463FF]">
 
         <!-- title -->
         <div class="absolute -top-12 md:-top-29">
-          <img x-show="!isWin && !isLose" class="w-[183px] md:w-[373.7px] h-[113px] md:h-[185px]" src="./assets/images/icon-pause.svg" alt="">
+          <img x-show="!isWin && !isLose" class="w-[183px] md:w-[373.7px] h-[113px] md:h-[185px]"
+            src="./assets/images/icon-pause.svg" alt="">
           <img x-show="isWin" src="./assets/images/icon-win.svg" alt="">
           <img x-show="isLose" src="./assets/images/icon-lose.svg" alt="">
         </div>
 
         <div class="flex flex-col items-center gap-[32px]">
           <!-- continue -->
-          <div @click="isPaused = !isPaused"
+          <div x-show="!isWin && !isLose" @click="isPaused = !isPaused"
             class="bg-blue-600 px-16 py-3 flex flex-col gap-2 rounded-[40px] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]">
             <p class="text-[32px] leading-[1.2] tracking-[1.75px] text-white">CONTINUE</p>
           </div>
 
+          <!-- restart -->
+           <div x-show="isWin || isLose" @click="startNewGame(selectedCategory), isPaused = false"
+            class="bg-blue-600 px-16 py-3 flex flex-col gap-2 rounded-[40px] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]">
+            <p class="text-[32px] leading-[1.2] tracking-[1.75px] text-white">PLAY AGAIN</p>
+          </div>
+
           <!-- new category -->
-          <div
+          <div @click="inGame = !inGame, isCat = !isCat, isPaused = !isPaused, isWin = false, isLose = false"
             class="bg-blue-600 px-16 py-3 flex flex-col gap-2 rounded-[40px] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]">
             <p class="text-[32px] leading-[1.2] tracking-[1.75px] text-white">NEW CATEGORY</p>
           </div>
@@ -351,7 +358,6 @@
         async init() {
           const data = await (await fetch('data.json')).json()
           this.categories = data.categories
-          this.startNewGame(this.selectedCategory)
         },
 
         toggleMenu() {
@@ -359,7 +365,7 @@
           this.isCat = !this.isCat
         },
 
-        quitGame(){
+        quitGame() {
           this.isMain = !this.isMain
           this.inGame = !this.inGame
           this.isPaused = !this.isPaused
@@ -370,11 +376,12 @@
           this.isHTP = !this.isHTP
         },
 
-        startPlay(){
+        startPlay() {
           this.isCat = !this.isCat
           this.inGame = !this.inGame
           this.startNewGame(this.selectedCategory)
         },
+
 
         startNewGame(categoryName) {
           this.selectedCategory = categoryName
@@ -392,7 +399,7 @@
           this.revealHints(3)
         },
 
-        revealHints(count){
+        revealHints(count) {
           if (!this.currentWord) return
           let uniqueLetters = [...new Set(this.currentWord.replace(/ /g, '').split(''))]
           let shuffled = uniqueLetters.sort(() => 0.5 - Math.random())
@@ -400,13 +407,26 @@
           this.guessedLetters.push(...hints)
         },
 
+        checkWin() {
+          let letters = [...new Set(this.currentWord.replace(/ /g, '').split(''))]
+          let hasWon = letters.every(letter => this.guessedLetters.includes(letter))
+          if (hasWon) {
+            this.isWin = true
+          }
+        },
+
         guess(letter) {
-          if (this.guessedLetters.includes(letter)) return
+          if (this.guessedLetters.includes(letter) || this.isWin || this.isLose) return
 
           this.guessedLetters.push(letter)
 
           if (!this.currentWord.includes(letter)) {
             this.lives = Math.max(0, this.lives - 1)
+            if (this.lives === 0) {
+              this.isLose = true
+            }
+          } else {
+            this.checkWin()
           }
         }
       }
