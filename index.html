@@ -298,7 +298,7 @@
         <button @click="guess(letter)" :disabled="guessedLetters.includes(letter)" :class="guessedLetters.includes(letter) 
                         ? 'bg-white/25 text-indigo-600 cursor-not-allowed shadow-none' 
                         : 'bg-white text-indigo-600 hover:bg-blue-600 hover:text-white active:translate-y-1 active:shadow-none'"
-          class="h-[56px] md:h-[84px] w-full md:w-[64px] rounded-[8px] md:rounded-[24px] text-[24px] leading-[1.2] tracking-[0.75px] md:text-[48px] md:tracking-[2.5px] flex items-center justify-center transition-all uppercase xl:w-[109px] xl:w-[84px]"
+          class="h-[56px] md:h-[84px] w-full md:w-[64px] rounded-[8px] cursor-pointer md:rounded-[24px] text-[24px] leading-[1.2] tracking-[0.75px] md:text-[48px] md:tracking-[2.5px] flex items-center justify-center transition-all uppercase xl:w-[109px] xl:w-[84px]"
           x-text="letter">
         </button>
       </template>
