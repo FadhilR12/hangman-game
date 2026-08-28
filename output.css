@@ -345,6 +345,15 @@
   .h-\[clamp\(46px\,7vw\,112px\)\] {
     height: clamp(46px, 7vw, 112px);
   }
+  .h-\[clamp\(56px\,7vw\,112px\)\] {
+    height: clamp(56px, 7vw, 112px);
+  }
+  .h-\[clamp\(56px\,7vw\,120px\)\] {
+    height: clamp(56px, 7vw, 120px);
+  }
+  .h-\[clamp\(56px\,9vw\,120px\)\] {
+    height: clamp(56px, 9vw, 120px);
+  }
   .h-auto {
     height: auto;
   }
@@ -396,6 +405,27 @@
   .w-\[clamp\(28px\,4\.5vw\,86px\)\] {
     width: clamp(28px, 4.5vw, 86px);
   }
+  .w-\[clamp\(40px\,4\.5vw\,86px\)\] {
+    width: clamp(40px, 4.5vw, 86px);
+  }
+  .w-\[clamp\(40px\,4\.5vw\,120px\)\] {
+    width: clamp(40px, 4.5vw, 120px);
+  }
+  .w-\[clamp\(40px\,4\.5vw\,180px\)\] {
+    width: clamp(40px, 4.5vw, 180px);
+  }
+  .w-\[clamp\(40px\,5\.5vw\,180px\)\] {
+    width: clamp(40px, 5.5vw, 180px);
+  }
+  .w-\[clamp\(40px\,5vw\,180px\)\] {
+    width: clamp(40px, 5vw, 180px);
+  }
+  .w-\[clamp\(40px\,7vw\,180px\)\] {
+    width: clamp(40px, 7vw, 180px);
+  }
+  .w-\[clamp\(px\,4\.5vw\,86px\)\] {
+    width: clamp(px, 4.5vw, 86px);
+  }
   .w-fit {
     width: fit-content;
   }
@@ -419,6 +449,9 @@
   }
   .min-w-\[40px\] {
     min-width: 40px;
+  }
+  .min-w-\[320px\] {
+    min-width: 320px;
   }
   .min-w-\[324px\] {
     min-width: 324px;
@@ -719,6 +752,9 @@
   .text-\[clamp\(16px\,3vw\,48px\)\] {
     font-size: clamp(16px, 3vw, 48px);
   }
+  .text-\[clamp\(16px\,3vw\,112px\)\] {
+    font-size: clamp(16px, 3vw, 112px);
+  }
   .leading-\[1\.2\] {
     --tw-leading: 1.2;
     line-height: 1.2;
@@ -858,6 +894,10 @@
     --tw-duration: 300ms;
     transition-duration: 300ms;
   }
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
+  }
   .\[-webkit-text-stroke\:8px_\#243041\] {
     -webkit-text-stroke: 8px #243041;
   }
@@ -908,8 +948,14 @@
     }
   }
   @media (width >= 48rem) {
+    .md\:-top-0 {
+      top: 0px;
+    }
     .md\:-top-29 {
       top: calc(var(--spacing) * -29);
+    }
+    .md\:-top-50 {
+      top: calc(var(--spacing) * -50);
     }
     .md\:mb-\[111px\] {
       margin-bottom: 111px;
@@ -992,8 +1038,14 @@
     .md\:w-\[592px\] {
       width: 592px;
     }
+    .md\:w-\[680\] {
+      width: 680;
+    }
     .md\:w-\[680px\] {
       width: 680px;
+    }
+    .md\:w-full {
+      width: 100%;
     }
     .md\:max-w-none {
       max-width: none;
@@ -1271,8 +1323,14 @@
     .xl\:gap-\[56px\] {
       gap: 56px;
     }
+    .xl\:gap-\[219\.5px\] {
+      gap: 219.5px;
+    }
     .xl\:gap-\[290px\] {
       gap: 290px;
+    }
+    .xl\:bg-\[url\(\.\/assets\/images\/background-desktop\.svg\)\] {
+      background-image: url(./assets/images/background-desktop.svg);
     }
     .xl\:text-center {
       text-align: center;
@@ -1287,12 +1345,23 @@
     .xl\:text-\[48px\] {
       font-size: 48px;
     }
+    .xl\:text-\[88px\] {
+      font-size: 88px;
+    }
     .xl\:text-\[136px\] {
       font-size: 136px;
+    }
+    .xl\:leading-\[1\.2\] {
+      --tw-leading: 1.2;
+      line-height: 1.2;
     }
     .xl\:tracking-\[2\.5px\] {
       --tw-tracking: 2.5px;
       letter-spacing: 2.5px;
+    }
+    .xl\:tracking-normal {
+      --tw-tracking: var(--tracking-normal);
+      letter-spacing: var(--tracking-normal);
     }
     @media (width >= 48rem) {
       .xl\:md\:gap-\[56px\] {

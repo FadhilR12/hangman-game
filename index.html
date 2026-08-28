@@ -11,7 +11,7 @@
 </head>
 
 <body x-data="app()"
-  class="font-mouse-memoirs min-w-90 bg-[url(./assets/images/background-mobile.svg)] md:bg-[url(./assets/images/background-tablet.svg)] lg:bg-[url(./assets/images/background-desktop.svg)] bg-no-repeat bg-cover items-center flex flex-col font-outfit min-h-screen justify-center overflow-x-hidden">
+  class="font-mouse-memoirs min-w-90 bg-[url(./assets/images/background-mobile.svg)] md:bg-[url(./assets/images/background-tablet.svg)] xl:bg-[url(./assets/images/background-desktop.svg)] bg-no-repeat bg-cover items-center flex flex-col font-outfit min-h-screen justify-center select-none overflow-x-hidden">
 
   <!-- Start screen start -->
   <section x-show="isMain" class="flex flex-col items-center min-h-screen justify-center">
@@ -169,21 +169,21 @@
 
   <!-- Pick a category start -->
   <section x-show="isCat"
-    class="flex relative flex-col items-center min-h-screen pt-[31px] md:pt-[61px] lg:pt-[80px] min-w-[324px] md:min-w-[680px] lg:w-screen lg:px-[114px] gap-[100px]">
+    class="flex relative flex-col items-center min-h-screen min-w-[324px] w-[324px] md:w-[680px] xl:w-full max-w-[1216px] mx-auto gap-8 md:gap-12 xl:gap-16 ">
     <!-- header -->
-    <div class="md:items-start flex w-full">
-      <div class="flex flex-row items-center mx-0 gap-[29px] md:gap-[54px] lg:gap-[219.5px]">
+    <div class="md:items-center flex w-full">
+      <div class="flex flex-row items-center mx-0 gap-[29px] md:gap-[54px] xl:gap-[219.5px]">
 
         <!-- return button -->
         <div @click="toggleMenu()"
-          class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] lg:w-[94px] lg:h-[94px] items-center flex justify-center bg-gradient-3 rounded-full border shadow-[inset_0_-5px_0_-1px_rgb(157_45_245/25%)]">
-          <img class="w-[17.45px] md:w-[28px] md:h-[26px] lg:w-[41px] lg:h-[38px] h-[17.45px]"
+          class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] xl:w-[94px] xl:h-[94px] items-center flex justify-center bg-gradient-3 rounded-full border shadow-[inset_0_-5px_0_-1px_rgb(157_45_245/25%)]">
+          <img class="w-[17.45px] md:w-[28px] md:h-[26px] xl:w-[41px] xl:h-[38px] h-[17.45px]"
             src="./assets/images/icon-back.svg" alt="">
         </div>
 
         <!-- PICK A CATEGORY -->
         <div
-          class="relative inline-block text-[48px] tracking-[2.5px] md:text-[104px] leading-[1.2] md:tracking-[-1px] lg:text-[136px]">
+          class="relative inline-block text-[48px] tracking-[2.5px] md:text-[104px] leading-[1.2] md:tracking-[-1px] xl:text-[136px]">
           <!-- Outline -->
           <p class="md:hidden absolute inset-0 text-slate-600 [-webkit-text-stroke:8px_#243041]">
             PICK A CATEGORY
@@ -239,7 +239,7 @@
 
         <!-- category -->
         <div
-          class="text-[40px] leading-[1.2] tracking-[1.75px] text-white md:text-[48px] md:tracking-[2.5px] lg:text-[88px] lg:leading-[1.2] lg:tracking-normal">
+          class="text-[40px] leading-[1.2] tracking-[1.75px] text-white md:text-[48px] md:tracking-[2.5px] xl:text-[88px] xl:leading-[1.2] xl:tracking-normal ">
           <p x-text="selectedCategory">MOVIES</p>
         </div>
       </div>
@@ -267,7 +267,7 @@
 
           <template x-for="(letter, lIdx) in w.split('')" :key="lIdx">
             <div
-              class="w-[clamp(28px,4.5vw,86px)] h-[clamp(46px,7vw,112px)] bg-[#2463FF] rounded-[8px] md:rounded-[40px] grid place-items-center text-white font-bold text-[clamp(16px,3vw,48px)] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]"
+              class="w-[clamp(40px,7vw,180px)] h-[clamp(56px,9vw,120px)] bg-[#2463FF] rounded-[8px] md:rounded-[40px] grid place-items-center text-white font-bold text-[clamp(16px,3vw,48px)] shadow-[inset_0_-2px_0_3px_#140E66,inset_0_1px_0_6px_#3C74FF]"
               :class="guessedLetters.includes(letter) ? 'opacity-100' : 'opacity-40'">
               <span x-text="guessedLetters.includes(letter) ? letter : ''"></span>
             </div>
@@ -301,8 +301,8 @@
         <div class="absolute -top-12 md:-top-29">
           <img x-show="!isWin && !isLose" class="w-[183px] md:w-[373.7px] h-[113px] md:h-[185px]"
             src="./assets/images/icon-pause.svg" alt="">
-          <img x-show="isWin" src="./assets/images/icon-win.svg" alt="">
-          <img x-show="isLose" src="./assets/images/icon-lose.svg" alt="">
+          <img class="w-[183px] md:w-[373.7px] h-[113px] md:h-[185px]" x-show="isWin" src="./assets/images/icon-win.svg" alt="">
+          <img class="w-[183px] md:w-[373.7px] h-[113px] md:h-[185px]" x-show="isLose" src="./assets/images/icon-lose.svg" alt="">
         </div>
 
         <div class="flex flex-col items-center gap-[32px]">
@@ -369,7 +369,7 @@
         quitGame() {
           this.isMain = !this.isMain
           this.inGame = !this.inGame
-          this.isPaused = !this.isPaused
+          this.isPaused = false
         },
         // inGame = !inGame, isMain = !isMain, isPaused = !isPaused
         toggleHowToPlay() {
