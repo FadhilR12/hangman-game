@@ -257,14 +257,22 @@
 
       <div class="flex flex-row items-center gap-[16px]">
         <!-- lives -->
-        <div class="w-[57px] md:w-[160px] xl:w-[119px] h-fit p-[4px] bg-white rounded-full flex flex-row">
-          <!-- <div class="w-[21px] md:w-[65px] xl:w-[119px] md:h-[13px] h-[8px] rounded-full bg-indigo-600"></div> -->
-          <div class="w-full h-[8px] md:h-[13px] rounded-full bg-indigo-600 transition-all duration-300"
-            :style="`width: ${(lives / maxLives) * 100}%`"></div>
+        <div
+          class="w-[57px] md:w-[160px] xl:w-[119px] h-fit p-[4px] bg-white rounded-full flex flex-row transition-all duration-300"
+          :class="(isWrong || (lives > 0 && lives <= 2)) ? 'shadow-[0_0_15px_rgba(239,68,68,0.8)] scale-105' : ''">
+
+          <!-- Health Bar Indicator -->
+          <div class="w-full h-[8px] md:h-[13px] rounded-full transition-colors duration-300" :class="{
+        'bg-red-500': isWrong || (lives > 0 && lives <= 2),
+        'bg-indigo-600': !isWrong && lives > 2,
+        'animate-pulse': isWrong || (lives > 0 && lives <= 2)
+      }" :style="`width: ${(lives / maxLives) * 100}%`">
+          </div>
         </div>
 
         <!-- live logo -->
-        <div class="w-[26px] h-[24px] md:w-[53.3px] md:h-[49px]">
+        <div class="w-[26px] h-[24px] md:w-[53.3px] md:h-[49px] transition-transform duration-300"
+          :class="(isWrong || (lives > 0 && lives <= 2)) ? 'scale-110 animate-pulse' : ''">
           <img src="./assets/images/icon-heart.svg" alt="">
         </div>
       </div>
@@ -293,9 +301,12 @@
 
 
     <!-- keyboard -->
-    <div class="grid grid-cols-9 gap-[8px] md:gap-[16px] xl:gap-[24px] my-auto w-full">
+    <div
+      class="grid grid-cols-9 gap-[8px] md:gap-[16px] xl:gap-[24px] my-auto w-full transition-all duration-150 ease-out"
+      :class="isWrong ? 'translate-x-4 opacity-50' : 'translate-x-0 opacity-100'">
       <template x-for="letter in alphabet" :key="letter">
-        <button @click="guess(letter)" :disabled="guessedLetters.includes(letter)" :class="guessedLetters.includes(letter) 
+        <button @click="guess(letter)" :disabled="guessedLetters.includes(letter)"
+          :class="guessedLetters.includes(letter) 
                         ? 'bg-white/25 text-indigo-600 cursor-not-allowed shadow-none' 
                         : 'bg-white text-indigo-600 hover:bg-blue-600 hover:text-white active:translate-y-1 active:shadow-none'"
           class="h-[56px] md:h-[84px] w-full md:w-[64px] rounded-[8px] cursor-pointer md:rounded-[24px] text-[24px] leading-[1.2] tracking-[0.75px] md:text-[48px] md:tracking-[2.5px] flex items-center justify-center transition-all uppercase xl:w-[109px] xl:w-[84px]"
@@ -374,6 +385,8 @@
         alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
         lives: 8,
         maxLives: 8,
+        isWrong: false,
+        wrongTimer: null,
 
         async init() {
           const data = await (await fetch('data.json')).json()
@@ -416,7 +429,8 @@
           this.lives = this.maxLives
           this.isWin = false
           this.isLose = false
-          this.revealHints(3)
+          this.isWrong = false
+          this.revealHints(1)
         },
 
         revealHints(count) {
@@ -442,6 +456,12 @@
 
           if (!this.currentWord.includes(letter)) {
             this.lives = Math.max(0, this.lives - 1)
+            clearTimeout(this.wrongTimer)
+            this.isWrong = true
+            this.wrongTimer = setTimeout(() => {
+              this.isWrong = false
+            }, 150)
+
             if (this.lives === 0) {
               this.isLose = true
             }
